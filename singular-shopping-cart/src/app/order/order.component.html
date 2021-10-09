@@ -1,0 +1,33 @@
+<div class="main-container" fxLayout="column" fxLayoutAlign="center center">
+
+  <ng-container *ngIf="!isValidClientIdAvailable()">
+    <h3>Valid client is not found!</h3>
+  </ng-container>
+  <ng-container  *ngIf="isValidClientIdAvailable()">
+    <h1>Choose your products</h1>
+
+    <div class="cards-container"  fxLayout="column" fxLayoutGap="10px" *ngIf="products" >
+      <ng-container *ngFor="let product of products" >
+
+
+        <mat-card >
+          <mat-card-title> {{ product.title }} </mat-card-title>
+          <mat-card-content>
+            <p>
+              {{product.description}}
+            </p>
+            <p>
+              {{ product.price | currency: 'ZAR'}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-raised-button color="primary" (click)="createOrderItem(product.id)" >Add to cart</button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+    </div>
+  </ng-container>
+
+
+
+</div>

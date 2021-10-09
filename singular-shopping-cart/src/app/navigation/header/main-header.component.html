@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <div>
+    <a routerLink="/">Singular shopping app</a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+      <li>
+        <a mat-button color="white" routerLink="/register">Register</a>
+      </li>
+      <li>
+        <a mat-button color="white" routerLink="/order">Order</a>
+      </li>
+      <li>
+        <a  mat-button color="white" routerLink="/cart"
+            [matBadge]="cartBadgeValue" matBadgePosition="below before" matBadgeColor="accent"
+        >Cart</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
