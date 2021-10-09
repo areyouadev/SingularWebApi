@@ -1,0 +1,129 @@
+<div class="pageHeader" >Enter your details!</div>
+<section class="signup-form">
+  <mat-spinner *ngIf="isShowingSpinner">
+
+  </mat-spinner>
+  <form *ngIf="!isShowingSpinner" fxLayout="column"  fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div fxLayout fxLayoutGap="10px">
+      <mat-form-field>
+        <input type="text"
+               matInput
+               placeholder="Your name"
+               ngModel name="name"
+               required
+               minlength="3"
+               maxlength="50"
+               #nameInput="ngModel"
+        >
+        <mat-error *ngIf="nameInput.hasError('required')">Name must not be empty.</mat-error>
+        <mat-error *ngIf="nameInput.hasError('minlength') || nameInput.hasError('maxlength')">Name needs to be between 3 and 50 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text"
+               matInput
+               placeholder="Your surname"
+               ngModel
+               name="surname"
+               required
+               #surnameInput="ngModel"
+               minlength="3"
+               maxlength="50"
+        >
+        <mat-error *ngIf="surnameInput.hasError('required')">Surname must not be empty.</mat-error>
+        <mat-error *ngIf="surnameInput.hasError('minlength') || surnameInput.hasError('maxlength')">Surname needs to be between 3 and 50 characters</mat-error>
+      </mat-form-field>
+
+    </div>
+    <div>
+      <span >Select address type</span>
+      <mat-radio-group
+        class="address-type-radio-group"
+        name="addressType"
+        ngModel
+        required
+        #addTypeInput="ngModel"
+
+      >
+        <mat-radio-button
+          class="address-type-radio-button"
+          *ngFor="let addressType of addressTypes; let addressTypeIndex = index" [value]="addressTypeIndex"
+        >
+          {{addressType}}
+        </mat-radio-button>
+        <div>
+          <mat-error *ngIf="f?.form?.touched &&  addTypeInput?.errors?.required">Address type is required.</mat-error>
+        </div>
+
+      </mat-radio-group>
+
+    </div>
+    <div>
+      <mat-form-field>
+        <input type="text"
+               matInput
+               placeholder="Your street address"
+               ngModel
+               name="streetAddress"
+               required
+               #streetAddressInput="ngModel"
+               minlength="3"
+               maxlength="100"
+        >
+        <mat-error *ngIf="streetAddressInput.hasError('required')">Street address must not be empty.</mat-error>
+        <mat-error *ngIf="streetAddressInput.hasError('minlength') || streetAddressInput.hasError('maxlength')">StreetAddress needs to be between 3 and 100 characters</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout fxLayoutGap="10px">
+     <mat-form-field>
+       <input type="text"
+              matInput
+              placeholder="Your suburb"
+              ngModel
+              name="suburb"
+              required
+              #suburbInput="ngModel"
+              minlength="3"
+              maxlength="50"
+       >
+       <mat-error *ngIf="suburbInput.hasError('required')">suburb must not be empty.</mat-error>
+       <mat-error *ngIf="suburbInput.hasError('minlength') || streetAddressInput.hasError('maxlength')">Suburb needs to be between 3 and 50 characters</mat-error>
+     </mat-form-field>
+    <mat-form-field>
+      <input type="text"
+             matInput
+             placeholder="Your city"
+             ngModel
+             name="city"
+             minlength="3"
+             maxlength="50"
+             #cityInput="ngModel">
+      <mat-error *ngIf="cityInput.hasError('minlength') || cityInput.hasError('maxlength')">City needs to be between 3 and 50 characters</mat-error>
+    </mat-form-field>
+
+   </div>
+    <div>
+     <mat-form-field  >
+       <input matInput
+              ngModel
+              #postalCodeInput="ngModel"
+              [customValidator]="postalCodeValidator"
+              name="postalCode"
+              minlength="3"
+              maxlength="10"
+              placeholder="Your postal code" required>
+
+       <mat-error *ngIf="postalCodeInput.hasError('required')">Postal code must not be empty.</mat-error>
+       <mat-error *ngIf="postalCodeInput.hasError('minlength') || postalCodeInput.hasError('maxlength')">City needs to be between 3 and 10 characters</mat-error>
+       <mat-error *ngIf=" !postalCodeInput.hasError('required') &&
+                          !postalCodeInput.hasError('minlength') &&
+                          !postalCodeInput.hasError('maxlength') &&
+                          postalCodeInput.hasError('isPostalCodeInvalid') ">Invalid postal code.</mat-error>
+     </mat-form-field>
+
+   </div>
+    <div style="text-align: center">
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid" >Submit</button>
+    </div>
+
+  </form>
+</section>
