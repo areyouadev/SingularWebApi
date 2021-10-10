@@ -1,1 +1,31 @@
-cart work
+<div class="main-container" fxLayout="column" fxLayoutAlign="center center">
+
+    <ng-container>
+      <h3>Valid client is not found!</h3>
+    </ng-container>
+    <ng-container>
+      <h1>Cart</h1>
+  
+      <div class="cards-container"  fxLayout="column" fxLayoutGap="10px" *ngIf="carts" >
+        <ng-container *ngFor="let cart of carts">
+            <mat-card >
+            <mat-card-title> {{ cart.id }} </mat-card-title>
+            <mat-card-content>
+              <p>
+                {{cart.productId}}
+              </p>
+              <p>
+                {{ cart.quantity }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-raised-button color="primary">Add to cart</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+      </div>
+    </ng-container>
+  
+  
+  
+  </div>
