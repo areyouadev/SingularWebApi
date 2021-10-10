@@ -1,25 +1,28 @@
 <div class="main-container" fxLayout="column" fxLayoutAlign="center center">
 
-    <ng-container>
-      <h3>Valid client is not found!</h3>
+    <ng-container> 
+      <h1>Client:  {{clientName}}</h1>
     </ng-container>
     <ng-container>
       <h1>Cart</h1>
   
-      <div class="cards-container"  fxLayout="column" fxLayoutGap="10px" *ngIf="carts" >
-        <ng-container *ngFor="let cart of carts">
+      <div class="cards-container"  fxLayout="column" fxLayoutGap="10px" *ngIf="orderDetailList" >
+        <ng-container *ngFor="let orderDetail of orderDetailList">
             <mat-card >
-            <mat-card-title> {{ cart.id }} </mat-card-title>
+            <mat-card-title> {{ orderDetail?.product?.title }} </mat-card-title>
             <mat-card-content>
               <p>
-                {{cart.productId}}
+                {{orderDetail?.product?.description}}
               </p>
               <p>
-                {{ cart.quantity }}
+                Price : ZAR {{orderDetail?.product?.price}} | Quantity: {{ orderDetail?.quantity }}
+              </p>
+              <p>
+                Amount : ZAR {{orderDetail?.cost}}
               </p>
             </mat-card-content>
             <mat-card-actions align="end">
-              <button mat-raised-button color="primary">Add to cart</button>
+              <button mat-raised-button color="warn" (click)="deleteCartItem(orderDetail)">Delete</button>
             </mat-card-actions>
           </mat-card>
         </ng-container>

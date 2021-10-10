@@ -60,7 +60,7 @@ namespace SingularWebApi.Data
                 products.Add(new Product(id: Guid.NewGuid(), title: "Product 9", description: "Description Product 9", price: 156));
                 products.Add(new Product(id: Guid.NewGuid(), title: "Product 10", description: "Description Product 10", price: 1392));
 
-                foreach (var product in products.Where(student => !this.Products.Any(x => x.Id == student.Id)))
+                foreach (var product in products.Where(student => !this.Products.Any(x => x.Title == student.Title)))
                 {
                     this.Products.Add(entity: product);
 
@@ -86,7 +86,7 @@ namespace SingularWebApi.Data
                     streetAddress: "5 st Avenue", suburb: "Forways", city: "Johannesburg", postalCode: "2190"));
 
 
-                foreach (var client in clients.Where(student => !this.Clients.Any(x => x.Id == student.Id)))
+                foreach (var client in clients.Where(student => !this.Clients.Any(x => x.Name == student.Name)))
                 {
                     this.Clients.Add(entity: client);
 
