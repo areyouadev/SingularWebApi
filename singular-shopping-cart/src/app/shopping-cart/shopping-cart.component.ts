@@ -53,21 +53,14 @@ export class ShoppingCartComponent implements OnInit {
           this.orderService
             .deleteSingleOrder(orderDetail.id)
             .subscribe(res => {
-              
-              this.sessionStorageService.remove(orderDetail.id!);
-              /* this.iOrderObj.id = orderDetail.id;
-              this.iOrderObj.clientId = orderDetail.clientId;
-              this.iOrderObj.cost = orderDetail.cost;
-              this.iOrderObj.productId = orderDetail.productId;
-              this.iOrderObj.quantity = orderDetail.quantity; */
-            
-              for (let cart of this.carts) {
+
+             for (let cart of this.carts) {
                 if (cart.id === orderDetail.id) {
                     this.carts.splice(this.carts.indexOf(cart), 1);
                     break;
                 }
             }  
-
+              this.sessionStorageService.set('cart', JSON.stringify(this.carts));
               this.responseOk = true;   
               console.log("Deleted for id "+ orderDetail.id)  
               console.log("Cart ength now " + this.carts.length);
